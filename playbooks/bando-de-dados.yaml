@@ -1,0 +1,25 @@
+---
+- name: Configuracao do server db
+  hosts: banco-de-dados
+
+  user: root
+  become: yes
+  vars_files:
+    - vars/main.yaml
+  vars:
+    - dbname: "db01"
+    - dbusername: "root"
+    - dbpassword: "sun123"
+  tasks:
+    - name: Configurar o host lab ansible
+      lineinfile: 
+        dest: /etc/hosts
+        state: present
+        line: "{{item}}"
+      with_items:
+        - 10.0.1.28 laboratorio
+        - 10.0.1.62 Aplicacao-java
+        - 10.0.1.97 banco-de-dados
+  roles:
+    - configuracao-default-so
+    - role: geerlingguy.mysql

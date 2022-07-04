@@ -1,0 +1,7 @@
+#Servers de aplications
+[apps]
+Aplicacao-java
+
+#Servers de databases
+[db]
+banco-de-dados
